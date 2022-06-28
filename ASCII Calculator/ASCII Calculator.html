@@ -1,0 +1,162 @@
+<doctype html>
+    <html>
+    <head>
+       <title>Calculator</title>
+       <style type="text/css">
+           body {
+    
+           }
+           form {
+               text-align: center;
+               margin:auto;
+           }
+           table {
+               border-collapse:separate;
+               border-spacing: 10px;
+               display: inline-block;
+               }
+           td    {
+               width: 50px;
+               height:50px;
+               text-align: center;
+               padding: 5px;
+               border:none;
+               }
+           div {
+               text-align: center;;
+               margin:auto;
+               }
+           input{
+               font-weight:bold;
+               width:100%;
+               height:100%;
+               border-radius:5px;
+               }
+               input[type=button]
+       </style>
+    
+       <script type="text/javascript">
+           //Globar Variable Declaration
+               var x = "";
+               var string1="";
+               var string2="";
+    
+               //Function to make an input
+           function setInput(str) {
+               var val = document.getElementById("inputDisplay");
+               //appends value to last input on display
+               x += str.value;
+               //Assigns value to input display
+               val.value = x;
+           }
+    
+           // when = gets clicked the function is called
+           function getOutput() {
+           var str = document.getElementById("inputDisplay").value;
+           var spl;
+           var res;
+           var symb;
+           //checks if sign is present the splits the string into two strings and assigns the syb that symbol
+           for(var i=0;i<str.length;i++) {
+              if(str[i] == "+") {
+                  spl = str.split("+");
+                  symb = "+";
+              }
+              if(str[i] == "-") {
+                  spl = str.split("-");
+                  symb = "-";
+              }
+              if(str[i] == "*") {
+                  spl = str.split("*");
+                  symb = "*";
+              }
+              if(str[i] == "/") {
+                  spl = str.split("/");
+                  symb = "/";
+              }
+           }
+    
+           // converts strings to string of numbers of ASCII value
+           for(var i=0;i<spl[0].length;i++) {
+                   string1 += spl[0].charCodeAt(i);
+               }
+               for(var i=0;i<spl[1].length;i++) {
+                   string2 += spl[1].charCodeAt(i);
+               }
+    
+               //converts string of numbers to number
+               var num1 = parseInt(string1);
+               var num2 = parseInt(string2);
+    
+               //Checks what symbol was as assigned to symb at the time of splitting and evaluate both numbers using that symbol
+               if(symb == "+") {
+                   res = eval(num1 + num2);
+               }
+               if(symb == "-") {
+                   res = eval(num1 - num2);
+               }
+               if(symb == "*") {
+                   res = eval(num1 * num2);
+               }
+               if(symb == "/") {
+                   res = eval(num1 / num2);
+               }
+    
+               // Displays the result on second display
+               document.getElementById("outputDisplay").value = res;
+           }
+           //function calFun(str1,str2,s) {}
+           function clearFun(str0,str1) {
+               x = '';
+               document.getElementById("inputDisplay").value = "";
+               document.getElementById("outputDisplay").value = "";
+           }
+    
+    
+       </script>
+    </head>
+    <body>
+       <div>
+    
+       <h1>Calculator</h1>
+       <br/>
+       <form Name="calculate">
+           <table border=2>
+           <tr>
+               <td colspan=4><input id="inputDisplay" name="disp" type="text" placeholder=""></td>
+           </tr>
+           <tr>
+               <td colspan=4><input id="outputDisplay" type="text" placeholder=""></td>
+           </tr>
+           <tr>
+               <td><input type="button" value="A" onclick="setInput(this)"></td>
+               <td><input type="button" value="B" onclick="setInput(this)"></td>
+               <td><input type="button" value="C" onclick="setInput(this)"></td>
+               <td><input type="button" value="CLEAR" onclick="clearFun()"></td>
+           </tr>
+    
+           <tr>
+               <td><input type="button" value="D" onclick="setInput(this)"></td>
+               <td><input type="button" value="E" onclick="setInput(this)"></td>
+               <td><input type="button" value="F" onclick="setInput(this)"></td>
+               <td><input type="button" value="+" onclick="setInput(this)"></td>
+               <td><input type="button" value="-" onclick="setInput(this)"></td>
+           </tr>
+           <tr>
+               <td><input type="button" value="G" onclick="setInput(this)"></td>
+               <td><input type="button" value="H" onclick="setInput(this)"></td>
+               <td><input type="button" value="I" onclick="setInput(this)"></td>
+               <td><input type="button" value="*" onclick="setInput(this)"></td>
+               <td><input type="button" value="/" onclick="setInput(this)"></td>
+           </tr>
+           <tr>
+               <td></td>
+               <td><input type="button" value="J" onclick="setInput(this)"></td>
+               <td><input type="button" value="=" onclick="getOutput()"></td>
+               <td></td>
+           </tr>
+           </table>
+       </form>
+       </div>
+    </body>
+    </html>
